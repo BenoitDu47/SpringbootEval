@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mes tâches</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+  <div class="text-danger" th:if="${error}" th:text="${error}"></div>
+
+  <nav class="navbar  bg-warning bg-opacity-25">
+    <ul class="navbar-nav flex-row w-100 justify-content-around px-2">
+      <li class="nav-item" th:each="category : ${categories}">
+        <a class="nav-link active btn btn-warning p-2" aria-current="page"
+           th:href="@{/index(page=0, keyword=${kw}, categoryId=${category.id})}"
+           th:text="${category.name}"></a>
+      </li>
+      <li>
+        <div class="panel-body">
+          <form th:action="@{/index}" method="get">
+            <input type="text" name="keyword" th:value="${keyword}">
+            <button type="submit" class="btn btn-warning">Rechercher</button>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container col-md-10 marge">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Liste des tâches</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-12 col-md-4" th:each="t:${listTask}">
+            <div class="card mt-1"  style="width: 18rem; ">
+              <div class="card-body bg-warning bg-opacity-25">
+                <div class="card-header bg-warning bg-opacity-30" >
+                  <h5 class="card-title" th:text="${t.title}"></h5>
+                </div>
+                <p class="card-text" th:text="${#dates.format(t.dueDate, 'dd/MM/yyyy')}"></p>
+                <p class="card-text" th:text="${t.description}"></p>
+                <p class="card-text">Statut: <span th:text="${t.taskStatus.name}"></span></p>
+                <div class="card-footer text-center bg-warning bg-opacity-25" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="btn btn-success" th:href="@{/edit(id=${t.id})}">Update</a>
+                <a class="btn btn-danger"
+                   th:href="@{/delete(id=${t.id}, page=${currentPage}, keyword=${keyword})}">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+  <div class="container col-md-10 marge">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div th:each="page, status : ${pages}"
+           th:class="${currentPage == status.index ? 'btn-group active' : 'btn-group'}" role="group"
+           aria-label="First group">
+        <a th:href="@{/index(page=${status.index}, keyword=${keyword}, categoryId=${selectedCategoryId})}" class="btn btn-warning" th:text="${status.index}"></a>
+      </div>
+    </div>
+  </div>
+  </footer>
+</div>
+</body>
+
+</html>
