@@ -19,6 +19,13 @@ public class TaskStatusController {
 
     private final Logger logger = LoggerFactory.getLogger(TaskStatusController.class);
 
+    /**
+     * Méthode qui contrôle si l'id du statut existe avant de renvoyer vers l'affichage des tâches  par statuts
+     *
+     * @param id    l'identifiant du statut
+     * @param model le modèle de la vue
+     * @return une redirection vers la page principale des tâches filtrée par le statut spécifié
+     */
     @GetMapping("/taskStatus")
     public String TasksStatus(Long id, Model model) {
         Long idStatu = (long)-1;

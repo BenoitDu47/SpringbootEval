@@ -33,7 +33,4 @@ public class Task implements Serializable {
     @ManyToOne
     private TaskStatus taskStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
 }

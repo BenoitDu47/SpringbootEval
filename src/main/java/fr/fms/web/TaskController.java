@@ -44,6 +44,17 @@ public class TaskController {
 
     private final Logger logger = LoggerFactory.getLogger(TaskController.class);
 
+    /**
+     * Méthode en GET correspondant à l'url .../index ou page d'accueil de notre application
+     *
+     * @param model         le modèle de la vue
+     * @param page          le numéro de page
+     * @param kw            le mot-clé de recherche
+     * @param categoryId    l'identifiant de la catégorie (optionnel)
+     * @param idCat         l'identifiant de la catégorie (par défaut : 0)
+     * @param error         le message d'erreur à afficher (facultatif)
+     * @return la vue "tasks" pour afficher la page principale des tâches
+     */
     @GetMapping("/index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "keyword", defaultValue = "") String kw,
@@ -80,6 +91,13 @@ public class TaskController {
         return "tasks";
     }
 
+    /**
+     * Méthode en GET correspondant à l'url .../edit permettant d'afficher une tâche en vue de sa mise à jour
+     *
+     * @param model le modèle de la vue
+     * @param id    l'identifiant de la tâche
+     * @return la vue "task" pour afficher le formulaire d'édition d'une tâche
+     */
     @GetMapping("/edit")
     public String editTask(Model model, @RequestParam("id") Long id) {
         try {
@@ -100,7 +118,15 @@ public class TaskController {
         return "task";
     }
 
-
+    /**
+     * Méthode en GET correspondant à l'url .../delete consistant à supprimer une tâches à partir de son id
+     *
+     * @param id             l'identifiant de la tâche à supprimer
+     * @param page           le numéro de page
+     * @param keyword        le mot-clé de recherche
+     * @param redirectAttrs  les attributs de redirection
+     * @return une redirection vers la page principale des tâches
+     */
     @GetMapping("/delete")
     public String delete(Long id, int page, String keyword , RedirectAttributes redirectAttrs) {
         try {
@@ -112,7 +138,15 @@ public class TaskController {
         return "redirect:/index?page=" + page + "&keyword=" + keyword;
     }
 
-
+    /**
+     * Méthode en POST correspondant à l'url .../save visant à sauvegarder ou mettre à jour une tâche
+     *
+     * @param task           la tâche à sauvegarder
+     * @param bindingResult  les résultats de la validation
+     * @param model          le modèle de la vue
+     * @param redirectAttrs  les attributs de redirection
+     * @return une redirection vers la page principale des tâches en cas de succès, sinon la vue "task"
+     */
     @PostMapping("/save")
     public String save(@Valid Task task, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
         try {
@@ -134,6 +168,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * 	 * Méthode en GET correspondant à l'url .../task permettant d'ajouter une nouvelle tâche
+     *
+     * @param model le modèle de la vue
+     * @return la vue "task" pour afficher le formulaire de création d'une tâche
+     */
     @GetMapping("/task")
     public String task(Model model) {
         List<Category> categories = categoryRepository.findAll();

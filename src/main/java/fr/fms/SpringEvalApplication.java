@@ -44,29 +44,29 @@ public class SpringEvalApplication implements CommandLineRunner {
 		TaskStatus inProgress = taskStatusRepository.save(new TaskStatus(null," In Progress",null));
 		TaskStatus done = taskStatusRepository.save(new TaskStatus(null,"Done",null));
 
-		taskRepository.save(new Task(null,"Installation","Installation de Spring Boot",new Date(),premierePhase,done,null));
-		taskRepository.save(new Task(null,"Configuration","Configuration du projet Maven ou Gradle",new Date(),premierePhase,done,null));
-		taskRepository.save(new Task(null,"Structure","Création de la structure de base du projet",new Date(),premierePhase,done,null));
-		taskRepository.save(new Task(null,"Dependances","Definition des dependances necessaires dans le fichier de configuration du projet",new Date(),premierePhase,done,null));
+		taskRepository.save(new Task(null,"Installation","Installation de Spring Boot",new Date(),premierePhase,done));
+		taskRepository.save(new Task(null,"Configuration","Configuration du projet Maven ou Gradle",new Date(),premierePhase,done));
+		taskRepository.save(new Task(null,"Structure","Création de la structure de base du projet",new Date(),premierePhase,done));
+		taskRepository.save(new Task(null,"Dependances","Definition des dependances necessaires dans le fichier de configuration du projet",new Date(),premierePhase,done));
 
-		taskRepository.save(new Task(null,"Entites","Creation des entites",new Date(),bdd,done,null));
-		taskRepository.save(new Task(null,"Repositories","Creation des repositories pour l'acces aux donnees",new Date(),bdd,done,null));
-		taskRepository.save(new Task(null,"Entites","Configuration de la source de la base de donnees",new Date(),bdd,inProgress,null));
+		taskRepository.save(new Task(null,"Entites","Creation des entites",new Date(),bdd,done));
+		taskRepository.save(new Task(null,"Repositories","Creation des repositories pour l'acces aux donnees",new Date(),bdd,done));
+		taskRepository.save(new Task(null,"Entites","Configuration de la source de la base de donnees",new Date(),bdd,inProgress));
 
-		taskRepository.save(new Task(null,"Controller","Creation des controller",new Date(),coucheDeService,inProgress,null));
-		taskRepository.save(new Task(null,"Business","Creation couche business",new Date(),coucheDeService,inProgress,null));
+		taskRepository.save(new Task(null,"Controller","Creation des controller",new Date(),coucheDeService,inProgress));
+		taskRepository.save(new Task(null,"Business","Creation couche business",new Date(),coucheDeService,inProgress));
 
-		taskRepository.save(new Task(null,"HTML","Creation des page html",new Date(),vue,inProgress,null));
-		taskRepository.save(new Task(null,"Bootstrap","bootstrap",new Date(),vue,inProgress,null));
+		taskRepository.save(new Task(null,"HTML","Creation des page html",new Date(),vue,inProgress));
+		taskRepository.save(new Task(null,"Bootstrap","bootstrap",new Date(),vue,inProgress));
 
-		taskRepository.save(new Task(null,"WebSecurityConfigurerAdapter","Installation Security Config avec Role",new Date(),securite,toDo,null));
-		taskRepository.save(new Task(null,"403","Creation page 403",new Date(),securite,toDo,null));
-		taskRepository.save(new Task(null,"Login","Gestion Login/Logout",new Date(),securite,toDo,null));
+		taskRepository.save(new Task(null,"WebSecurityConfigurerAdapter","Installation Security Config avec Role",new Date(),securite,toDo));
+		taskRepository.save(new Task(null,"403","Creation page 403",new Date(),securite,toDo));
+		taskRepository.save(new Task(null,"Login","Gestion Login/Logout",new Date(),securite,toDo));
 
-		taskRepository.save(new Task(null,"ASSERTJ","ASSERTJ",new Date(), tests,toDo,null));
-		taskRepository.save(new Task(null,"ControllerTest","Tester un Controller(MockMvc Mockito)",new Date(), tests,toDo,null));
+		taskRepository.save(new Task(null,"ASSERTJ","ASSERTJ",new Date(), tests,toDo));
+		taskRepository.save(new Task(null,"ControllerTest","Tester un Controller(MockMvc Mockito)",new Date(), tests,toDo));
 
-		taskRepository.save(new Task(null,"Deploiement","Déploiement avec maven",new Date(), deploiement,toDo,null));
+		taskRepository.save(new Task(null,"Deploiement","Déploiement avec maven",new Date(), deploiement,toDo));
 
 		categoryRepository.findAll().forEach(c -> System.out.println(c));
 		taskStatusRepository.findAll().forEach(s -> System.out.println(s));

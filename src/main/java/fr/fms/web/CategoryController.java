@@ -19,6 +19,14 @@ public class CategoryController {
 	
 	private final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
+
+	/**
+	 * Méthode qui contrôle si l'id de la catégorie existe avant de renvoyer vers l'affichage des tâches par catégorie
+	 *
+	 * @param id    l'identifiant de la catégorie
+	 * @param model le modèle de la vue
+	 * @return une redirection vers la page principale des tâches filtrée par la catégorie spécifiée
+	 */
 	@GetMapping("/category")
 	public String categories(Long id, Model model) {
 		Long idCat = (long)-1;
