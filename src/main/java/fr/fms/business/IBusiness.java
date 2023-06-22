@@ -19,7 +19,7 @@ public interface IBusiness {
 
     public void saveTask(Task task) throws Exception;
 
-    public Task getTaskById(Long id) throws Exception;
+    Task getTaskById(Long id) throws Exception;
 
     public void deleteTask(Long id) throws Exception;
 

@@ -68,7 +68,7 @@ public class TaskController {
             if (categoryId != null) {
                 tasks = taskRepository.findByCategoryIdAndDescriptionContains(categoryId, kw, PageRequest.of(page, 6));
             } else {
-                tasks = taskRepository.findByDescriptionContains(kw, PageRequest.of(page, 6));
+                tasks = taskRepository.findByDescriptionContains(kw);
             }
 
             model.addAttribute("listTask", tasks.getContent());
