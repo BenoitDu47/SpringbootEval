@@ -14,7 +14,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAll();
 
-    Page<Task> findByDescriptionContains(String description);
+    Page<Task> findByDescriptionContains(String description, PageRequest pageRequest);
 
     Page<Task> findByCategoryIdAndDescriptionContains(Long categoryId, String kw, PageRequest of);
 
